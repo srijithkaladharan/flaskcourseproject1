@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
+from flask_cors import CORS
 
 
 from security import authenticate,identity
@@ -12,6 +13,8 @@ from resources.item import Item,ItemList
 
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 #app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///my_database.db"
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///my_database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
